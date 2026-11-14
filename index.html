@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="CloudPanel: panel de monitoreo de servidores e instancias cloud.">
+  <title>Resumen · CloudPanel</title>
+
+  <!-- Aplica el tema guardado antes de pintar para evitar parpadeo -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('cp-tema');
+        if (t === 'oscuro' || t === 'claro') {
+          document.documentElement.setAttribute('data-theme', t === 'oscuro' ? 'dark' : 'light');
+        }
+      } catch (e) { /* sin almacenamiento: se usa el tema del sistema */ }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/overlays.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <div class="app" id="app">
+
+    <!-- ============ ZONA 1 · NAVEGACIÓN: header fijo ============ -->
+    <header class="header">
+      <button class="btn btn--icon btn--ghost" id="btn-menu" type="button"
+              aria-label="Mostrar u ocultar el menú de navegación"
+              aria-controls="sidebar" aria-expanded="false">
+        <span data-icon="menu" data-size="22"></span>
+      </button>
+
+      <nav class="breadcrumbs" aria-label="Ruta de navegación">
+        <ol id="migas"></ol>
+      </nav>
+
+      <div class="header__actions">
+        <button class="btn btn--icon btn--ghost" id="btn-tema" type="button" aria-label="Cambiar a modo oscuro">
+          <span data-icon="moon"></span>
+        </button>
+        <a class="btn btn--icon btn--ghost notif" id="btn-alertas" href="#/alertas" aria-label="Ver alertas">
+          <span data-icon="bell"></span>
+          <span class="notif__dot" aria-hidden="true"></span>
+        </a>
+        <div class="avatar" role="img" aria-label="Sesión: Administrador">AD</div>
+      </div>
+    </header>
+
+    <!-- ============ ZONA 1 · NAVEGACIÓN: sidebar retráctil ============ -->
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#/resumen" aria-label="CloudPanel, ir al resumen">
+        <span data-icon="cloud" data-size="26"></span>
+        <span class="nav__label">CloudPanel</span>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <ul class="nav">
+          <li>
+            <a class="nav__link" href="#/resumen" data-nav="resumen" aria-label="Resumen">
+              <span data-icon="grid"></span><span class="nav__label">Resumen</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="#/servidores" data-nav="servidores" aria-label="Servidores">
+              <span data-icon="server"></span><span class="nav__label">Servidores</span>
+              <span class="nav__count nav__label" id="cuenta-servidores" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="#/alertas" data-nav="alertas" aria-label="Alertas">
+              <span data-icon="bell"></span><span class="nav__label">Alertas</span>
+              <span class="nav__count nav__count--alert nav__label" id="cuenta-alertas" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="#/configuracion" data-nav="configuracion" aria-label="Configuración">
+              <span data-icon="sliders"></span><span class="nav__label">Configuración</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar__footer nav__label">
+        <strong><span class="pulse" aria-hidden="true"></span>Sistema operativo</strong>
+        Datos simulados · v1.0
+      </div>
+    </aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <!-- ============ ZONA 2 · CONTENIDO DINÁMICO (SPA) ============ -->
+    <main class="main" id="contenido" tabindex="-1">
+      <div class="view" id="vista"></div>
+      <noscript>Esta aplicación necesita JavaScript para funcionar.</noscript>
+    </main>
+  </div>
+
+  <!-- ============ ZONA 3 · Drawer y Modal se insertan aquí por JS ============ -->
+  <div class="toast-region" id="toasts" role="status" aria-live="polite"></div>
+
+  <!-- JavaScript modular (un archivo por responsabilidad) -->
+  <script src="js/iconos.js"></script>
+  <script src="js/datos.js"></script>
+  <script src="js/tema.js"></script>
+  <script src="js/ui/toast.js"></script>
+  <script src="js/ui/overlay.js"></script>
+  <script src="js/ui/dropdown.js"></script>
+  <script src="js/ui/grafica.js"></script>
+  <script src="js/acciones.js"></script>
+  <script src="js/vistas/resumen.js"></script>
+  <script src="js/vistas/servidores.js"></script>
+  <script src="js/vistas/detalle.js"></script>
+  <script src="js/vistas/alertas.js"></script>
+  <script src="js/vistas/configuracion.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
