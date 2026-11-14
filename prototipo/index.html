@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UX: User Persona y wireframes · CloudPanel</title>
+  <link rel="stylesheet" href="wire.css">
+</head>
+<body>
+  <main class="pagina">
+    <header>
+      <h1>Fase 1 · Técnicas de UX y prototipado</h1>
+      <p>Trabajo previo a la codificación de CloudPanel: quién usa el panel, cómo se distribuye
+         la información en móvil y escritorio, y el flujo principal validado en un prototipo navegable.</p>
+      <div class="fila" style="margin-top:16px">
+        <a class="boton boton--pri" href="prototipo.html">Abrir el prototipo interactivo</a>
+        <a class="boton" href="../index.html">Abrir la aplicación final</a>
+      </div>
+    </header>
+
+    <!-- ================= USER PERSONA ================= -->
+    <section class="seccion" aria-labelledby="t-persona">
+      <h2 id="t-persona">1. User Persona</h2>
+      <article class="persona">
+        <div class="persona__perfil">
+          <div class="persona__foto" aria-hidden="true">AM</div>
+          <div>
+            <p class="persona__nombre">Andrés Molina</p>
+            <p class="persona__rol">Ingeniero Cloud / DevOps</p>
+          </div>
+          <p class="persona__cita">“Cuando algo se cae a las 3 a. m., necesito saber qué pasa en diez segundos y desde el teléfono.”</p>
+          <dl class="persona__datos">
+            <dt>Edad</dt><dd>31 años</dd>
+            <dt>Ubicación</dt><dd>Monterrey, México</dd>
+            <dt>Experiencia</dt><dd>7 años en infraestructura</dd>
+            <dt>Equipo</dt><dd>4 ingenieros, guardias rotativas</dd>
+            <dt>Dispositivos</dt><dd>Laptop + monitor externo; smartphone en guardia</dd>
+          </dl>
+        </div>
+
+        <div class="persona__bloques">
+          <div class="bloque">
+            <h3>Metas</h3>
+            <ul>
+              <li>Detectar un problema antes de que lo note el cliente.</li>
+              <li>Ver el consumo de CPU, memoria y red de un vistazo.</li>
+              <li>Ajustar una instancia sin salir de la pantalla en la que está.</li>
+              <li>Ejecutar acciones críticas con la seguridad de no equivocarse de servidor.</li>
+            </ul>
+          </div>
+          <div class="bloque">
+            <h3>Frustraciones</h3>
+            <ul>
+              <li>Paneles que no se pueden usar en el teléfono.</li>
+              <li>Botones de “Eliminar” junto a acciones cotidianas y sin confirmación.</li>
+              <li>No saber si un clic se registró: termina enviando la acción dos veces.</li>
+              <li>Interfaces claras que deslumbran durante las guardias nocturnas.</li>
+            </ul>
+          </div>
+          <div class="bloque">
+            <h3>Nivel técnico</h3>
+            <div class="nivel">
+              <span>Linux y redes</span><div class="nivel__barra"><span style="width:95%"></span></div>
+              <span>Nube (AWS/GCP)</span><div class="nivel__barra"><span style="width:90%"></span></div>
+              <span>Automatización</span><div class="nivel__barra"><span style="width:80%"></span></div>
+              <span>Diseño visual</span><div class="nivel__barra"><span style="width:25%"></span></div>
+            </div>
+            <p style="margin-top:8px;font-size:0.9rem;color:#555">Usuario experto: prefiere el teclado, valora la densidad de información y los atajos.</p>
+          </div>
+          <div class="bloque">
+            <h3>Escenarios de uso cotidiano</h3>
+            <ul>
+              <li><strong>Revisión matutina (escritorio):</strong> abre el resumen, revisa alertas y la carga por región.</li>
+              <li><strong>Guardia nocturna (móvil):</strong> recibe una alerta, busca el servidor y lo reinicia con una mano.</li>
+              <li><strong>Mantenimiento planificado:</strong> programa la fecha y activa respaldos desde el panel de configuración.</li>
+            </ul>
+          </div>
+          <div class="bloque" style="grid-column:1 / -1">
+            <h3>Cómo responde el diseño</h3>
+            <ul>
+              <li>Estrategia mobile-first y zonas táctiles de 44 px para las guardias desde el teléfono.</li>
+              <li>Modo oscuro automático y manual para el trabajo nocturno.</li>
+              <li>Drawer de configuración que conserva el contexto de la tabla.</li>
+              <li>Modal de confirmación, estado Loading con bloqueo de reenvío y cierre con Esc.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ================= WIREFRAMES ================= -->
+    <section class="seccion" aria-labelledby="t-movil">
+      <h2 id="t-movil">2. Wireframes de baja fidelidad · Móvil (360 px)</h2>
+      <p>Sólo cajas, líneas y texto: se decide la distribución espacial sin distracciones estéticas.
+         Una columna, navegación oculta tras el botón ☰ y controles al alcance del pulgar.</p>
+      <div class="galeria" data-galeria="movil"></div>
+    </section>
+
+    <section class="seccion" aria-labelledby="t-escritorio">
+      <h2 id="t-escritorio">3. Wireframes de baja fidelidad · Escritorio (1280 px)</h2>
+      <p>El mismo contenido se reorganiza: sidebar persistente, Bento Grid de cuatro columnas y tabla completa.</p>
+      <div class="galeria" data-galeria="escritorio"></div>
+    </section>
+
+    <section class="seccion" aria-labelledby="t-flujo">
+      <h2 id="t-flujo">4. Flujo principal validado</h2>
+      <p><strong>Resumen → Servidores → menú ⋯ → Reiniciar → Modal de confirmación → Loading → Resultado.</strong>
+         El flujo alterno abre el Drawer de configuración y guarda cambios.</p>
+      <div class="fila">
+        <a class="boton boton--pri" href="prototipo.html">Recorrer el flujo en el prototipo</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="wire.js"></script>
+  <script>
+    (function () {
+      var LAMINAS = {
+        movil: ['resumen', 'nav-resumen', 'servidores', 'menu', 'drawer', 'modal'],
+        escritorio: ['resumen', 'servidores', 'drawer', 'modal']
+      };
+      Object.keys(LAMINAS).forEach(function (dispositivo) {
+        var galeria = document.querySelector('[data-galeria="' + dispositivo + '"]');
+        LAMINAS[dispositivo].forEach(function (id, i) {
+          var p = Wire.pantallas[id];
+          var figura = document.createElement('figure');
+          figura.className = 'lamina';
+          figura.innerHTML = '<div class="w-frame w-frame--' + dispositivo + '"></div>' +
+            '<figcaption><strong>' + (i + 1) + '. ' + p.titulo + '</strong>' + p.nota + '</figcaption>';
+          Wire.pintar(figura.firstChild, id);
+          galeria.appendChild(figura);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prototipo interactivo · CloudPanel</title>
+  <link rel="stylesheet" href="wire.css">
+</head>
+<body>
+  <main class="pagina proto" id="proto">
+    <header>
+      <h1>Prototipo interactivo de baja fidelidad</h1>
+      <p>Valida el flujo principal: navegar entre vistas y ejecutar una acción crítica.
+         Haz clic en las zonas interactivas; si haces clic en otro lugar, se resaltan en azul.</p>
+      <div class="fila" style="margin-top:16px">
+        <button class="boton" type="button" data-dispositivo="movil" aria-pressed="true">Móvil</button>
+        <button class="boton" type="button" data-dispositivo="escritorio" aria-pressed="false">Escritorio</button>
+        <button class="boton" type="button" id="reiniciar">Reiniciar recorrido</button>
+        <a class="boton" href="index.html">Persona y wireframes</a>
+      </div>
+    </header>
+
+    <div class="proto__escenario">
+      <div class="proto__marco">
+        <div class="w-frame w-frame--movil" id="marco" aria-live="polite"></div>
+      </div>
+
+      <aside class="proto__panel" aria-label="Guía del recorrido">
+        <div>
+          <p class="proto__paso">Pantalla actual</p>
+          <h2 id="titulo"></h2>
+          <p id="nota"></p>
+        </div>
+        <div>
+          <p class="proto__paso">Tareas a validar</p>
+          <ol id="tareas">
+            <li data-tarea="servidores">Ir de Resumen a Servidores.</li>
+            <li data-tarea="menu">Abrir el menú ⋯ de <em>srv-web-01</em>.</li>
+            <li data-tarea="modal">Elegir “Reiniciar” y leer la confirmación.</li>
+            <li data-tarea="reiniciado">Confirmar y ver el resultado.</li>
+            <li data-tarea="guardado">Extra: configurar la instancia en el drawer y guardar.</li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script src="wire.js"></script>
+  <script>
+    (function () {
+      var proto = document.getElementById('proto');
+      var marco = document.getElementById('marco');
+      var espera = null;
+
+      function mostrar(id) {
+        var p = Wire.pantallas[id];
+        if (!p) return;
+        clearTimeout(espera);
+        Wire.pintar(marco, id);
+        document.getElementById('titulo').textContent = p.titulo;
+        document.getElementById('nota').textContent = p.nota;
+
+        // Las zonas interactivas también funcionan con teclado.
+        marco.querySelectorAll('[data-ir]').forEach(function (el) {
+          if (!el.classList.contains('w-scrim')) {
+            el.tabIndex = 0;
+            el.setAttribute('role', 'button');
+          }
+        });
+
+        var tarea = document.querySelector('[data-tarea="' + id + '"]');
+        if (tarea) tarea.classList.add('hecho');
+
+        // Las pantallas de carga avanzan solas (4D: tiempo).
+        if (p.siguiente) espera = setTimeout(function () { mostrar(p.siguiente); }, 1400);
+      }
+
+      marco.addEventListener('click', function (e) {
+        var zona = e.target.closest('[data-ir]');
+        if (zona) { mostrar(zona.dataset.ir); return; }
+        // Clic fuera de una zona interactiva: se muestran las pistas.
+        proto.classList.remove('pista');
+        void proto.offsetWidth;
+        proto.classList.add('pista');
+      });
+
+      marco.addEventListener('keydown', function (e) {
+        if ((e.key === 'Enter' || e.key === ' ') && e.target.dataset.ir) {
+          e.preventDefault();
+          mostrar(e.target.dataset.ir);
+        }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        // Esc cierra el drawer o el modal, igual que en la aplicación final.
+        if (e.key === 'Escape' && marco.querySelector('.w-drawer, .w-modal .w-btn--pri')) mostrar('servidores');
+      });
+
+      document.querySelectorAll('[data-dispositivo]').forEach(function (boton) {
+        boton.addEventListener('click', function () {
+          document.querySelectorAll('[data-dispositivo]').forEach(function (b) {
+            b.setAttribute('aria-pressed', String(b === boton));
+          });
+          marco.className = 'w-frame w-frame--' + boton.dataset.dispositivo;
+        });
+      });
+
+      document.getElementById('reiniciar').addEventListener('click', function () {
+        document.querySelectorAll('#tareas .hecho').forEach(function (li) { li.classList.remove('hecho'); });
+        mostrar('resumen');
+      });
+
+      mostrar('resumen');
+    })();
+  </script>
+</body>
+</html>

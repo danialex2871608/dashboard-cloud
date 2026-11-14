@@ -9,6 +9,8 @@ ni ninguna otra librería o framework.
 
 **Aplicación en línea:** https://danialex2871608.github.io/dashboard-cloud/
 
+**Prototipo UX interactivo:** https://danialex2871608.github.io/dashboard-cloud/prototipo/prototipo.html
+
 ## Cómo abrirlo
 
 No requiere instalación ni servidor: abre `index.html` con doble clic en cualquier navegador moderno.
@@ -26,18 +28,26 @@ dashboard-cloud/
 │   ├── layout.css          Grid macro, header, sidebar y Bento Grid (mobile-first)
 │   ├── components.css      Botones, campos, switch, dropdown, tabla, gráficas
 │   └── overlays.css        Drawer, modal y toasts
-└── js/
-    ├── iconos.js           Iconografía SVG
-    ├── datos.js            Datos simulados y almacén con suscripción
-    ├── tema.js             Modo oscuro (sistema + toggle manual)
-    ├── acciones.js         Configurar, reiniciar y eliminar una instancia
-    ├── router.js           Enrutador por hash, migas de pan y foco
-    ├── main.js             Punto de entrada: sidebar, tema y atajos
-    ├── ui/                 toast, overlay (drawer/modal), dropdown, gráfica
-    └── vistas/             resumen, servidores, detalle, alertas, configuración
+├── js/
+│   ├── iconos.js           Iconografía SVG
+│   ├── datos.js            Datos simulados y almacén con suscripción
+│   ├── tema.js             Modo oscuro (sistema + toggle manual)
+│   ├── acciones.js         Configurar, reiniciar y eliminar una instancia
+│   ├── router.js           Enrutador por hash, migas de pan y foco
+│   ├── main.js             Punto de entrada: sidebar, tema y atajos
+│   ├── ui/                 toast, overlay (drawer/modal), dropdown, gráfica
+│   └── vistas/             resumen, servidores, detalle, alertas, configuración
+└── prototipo/
+    ├── index.html          User Persona y wireframes de baja fidelidad
+    ├── prototipo.html      Prototipo navegable del flujo principal
+    └── wire.css, wire.js   Estilos y pantallas de los wireframes
 ```
 
 ## Qué cubre de la práctica
+
+### UX y prototipado
+- **User Persona** y **wireframes** de móvil y escritorio en `prototipo/index.html`.
+- **Prototipo navegable** en `prototipo/prototipo.html`: Resumen → Servidores → menú → Reiniciar → confirmación → resultado.
 
 ### Layout y mobile-first
 - Las reglas base de CSS son para teléfono. Tres media queries con `min-width` amplían el diseño: **600 px**, **768 px** y **1100 px**.
