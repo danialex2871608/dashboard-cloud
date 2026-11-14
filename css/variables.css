@@ -1,0 +1,152 @@
+/* ==========================================================================
+   variables.css — Design tokens (Fase 4: Modo oscuro nativo con variables CSS)
+   La paleta se define en :root y se conmuta de dos formas:
+     1. Automática: media query prefers-color-scheme.
+     2. Manual: atributo data-theme="light|dark" en <html> (toggle del header).
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* Superficies y texto */
+  --bg: #f3f5f9;
+  --surface: #ffffff;
+  --surface-2: #f0f2f7;
+  --surface-3: #e3e7ef;
+  --text: #141a26;
+  --text-muted: #566176;
+  --border: #d9dee8;
+  --border-strong: #9aa4b5;
+
+  /* Color de marca / acción */
+  --primary: #2952e3;
+  --primary-hover: #1f41bd;
+  --primary-soft: #e6ecff;
+  --on-primary: #ffffff;
+
+  /* Colores funcionales (estado) */
+  --success: #177a3e;
+  --success-soft: #dff5e7;
+  --warning: #8f5400;
+  --warning-soft: #fff0d1;
+  --danger: #c42b2b;
+  --danger-hover: #a01f1f;
+  --danger-soft: #fde5e5;
+  --on-danger: #ffffff;
+  --info: #0b6aa8;
+  --info-soft: #dff0fb;
+
+  /* Gráficas */
+  --chart-1: #2952e3;
+  --chart-2: #0e9384;
+  --chart-grid: #e3e7ef;
+
+  --focus: #2952e3;
+  --backdrop: rgb(15 20 30 / 0.5);
+  --shadow-sm: 0 1px 2px rgb(20 26 38 / 0.06);
+  --shadow-md: 0 6px 18px rgb(20 26 38 / 0.1);
+  --shadow-lg: 0 18px 48px rgb(20 26 38 / 0.22);
+
+  /* Tipografía (2D: jerarquía legible) */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.625rem;
+  --fs-2xl: 2.25rem;
+
+  /* Espaciado */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+
+  --radius: 14px;
+  --radius-sm: 8px;
+
+  /* 3D: zona táctil mínima de 44x44 px */
+  --tap: 44px;
+  --header-h: 56px;
+
+  /* 4D: duración controlada entre 200 y 350 ms */
+  --dur-fast: 200ms;
+  --dur: 250ms;
+  --dur-slow: 350ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+/* 1) Preferencia del sistema operativo (si el usuario no forzó "claro") */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0c1017;
+    --surface: #151a23;
+    --surface-2: #1c2330;
+    --surface-3: #283142;
+    --text: #e7ebf2;
+    --text-muted: #9ba6b8;
+    --border: #2a3342;
+    --border-strong: #56627a;
+    --primary: #7d9bff;
+    --primary-hover: #9db3ff;
+    --primary-soft: #1c2748;
+    --on-primary: #0b1020;
+    --success: #4fd187;
+    --success-soft: #12301f;
+    --warning: #f5b942;
+    --warning-soft: #3a2a0c;
+    --danger: #ff7b7b;
+    --danger-hover: #ff9c9c;
+    --danger-soft: #3d1717;
+    --on-danger: #2a0808;
+    --info: #63b8ef;
+    --info-soft: #10293b;
+    --chart-1: #7d9bff;
+    --chart-2: #3fd0bd;
+    --chart-grid: #2a3342;
+    --focus: #a9bcff;
+    --backdrop: rgb(0 0 0 / 0.62);
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+    --shadow-md: 0 6px 18px rgb(0 0 0 / 0.45);
+    --shadow-lg: 0 18px 48px rgb(0 0 0 / 0.6);
+  }
+}
+
+/* 2) Conmutación manual con el toggle (tiene prioridad sobre el sistema) */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0c1017;
+  --surface: #151a23;
+  --surface-2: #1c2330;
+  --surface-3: #283142;
+  --text: #e7ebf2;
+  --text-muted: #9ba6b8;
+  --border: #2a3342;
+  --border-strong: #56627a;
+  --primary: #7d9bff;
+  --primary-hover: #9db3ff;
+  --primary-soft: #1c2748;
+  --on-primary: #0b1020;
+  --success: #4fd187;
+  --success-soft: #12301f;
+  --warning: #f5b942;
+  --warning-soft: #3a2a0c;
+  --danger: #ff7b7b;
+  --danger-hover: #ff9c9c;
+  --danger-soft: #3d1717;
+  --on-danger: #2a0808;
+  --info: #63b8ef;
+  --info-soft: #10293b;
+  --chart-1: #7d9bff;
+  --chart-2: #3fd0bd;
+  --chart-grid: #2a3342;
+  --focus: #a9bcff;
+  --backdrop: rgb(0 0 0 / 0.62);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 6px 18px rgb(0 0 0 / 0.45);
+  --shadow-lg: 0 18px 48px rgb(0 0 0 / 0.6);
+}
